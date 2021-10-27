@@ -14,16 +14,10 @@ import RxSwift
 import UIKit
 
 protocol WeatherHomeBusinessLogic {
-    func fetch()
-    func openWeatherDetail(indexPath: IndexPath)
-
-    // DataSource
-    func getDataSourceCount() -> Int
-    func getDataSourceItem(indexPath: IndexPath) -> GetWeatherHomeItemModel
+    func fetch(city: String)
 }
 
 protocol WeatherHomeDataStore {
-    var cityID: Int? { get set }
 }
 
 final class WeatherHomeInteractor: WeatherHomeBusinessLogic, WeatherHomeDataStore {
@@ -32,46 +26,18 @@ final class WeatherHomeInteractor: WeatherHomeBusinessLogic, WeatherHomeDataStor
         WeatherHomeWorker()
     }()
 
-    var cityID: Int?
-
-    // RX
     fileprivate var disposeBag = DisposeBag()
-
-    // Store
-    private var dataSource: [GetWeatherHomeItemModel] = []
     private var isLoading: Bool = false
 
-    // DataSource
-    func getDataSourceCount() -> Int {
-        return dataSource.count
-    }
-
-    func getDataSourceItem(indexPath: IndexPath) -> GetWeatherHomeItemModel {
-        return dataSource[indexPath.row]
-    }
-
-    func fetch() {
+    func fetch(city: String) {
         isLoading = true
-        worker?.getHomeWeather().subscribe(onSuccess: { [weak self] response in
-//            if let items = response.name {
-            ////                self?.dataSource.append(contentsOf: items)
-            ////                self?.presenter?.presentTableReloadData()
-//
-//                print("odfsf",items)
-//            }
+        worker?.getHomeWeather(city: city).subscribe(onSuccess: { [weak self] response in
+            self?.presenter?.presentWeather(res: response)
 
-            print("kdopfs", response.name, response.timezone)
             self?.isLoading = false
         }, onFailure: { [weak self] error in
-            self?.presenter?.presentTableReloadData()
             self?.isLoading = false
             print("Error: \(error)")
         }, onDisposed: nil).disposed(by: disposeBag)
-    }
-
-    func openWeatherDetail(indexPath: IndexPath) {
-        let weather = getDataSourceItem(indexPath: indexPath)
-        cityID = weather.id
-        presenter?.presentWeatherDetail()
     }
 }

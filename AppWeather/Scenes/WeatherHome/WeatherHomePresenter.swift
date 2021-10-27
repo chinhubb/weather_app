@@ -13,18 +13,13 @@
 import UIKit
 
 protocol WeatherHomePresentationLogic {
-    func presentTableReloadData()
-    func presentWeatherDetail()
+    func presentWeather(res: GetWeatherHomeElement)
 }
 
 final class WeatherHomePresenter: WeatherHomePresentationLogic {
     weak var viewController: WeatherHomeDisplayLogic?
-
-    func presentTableReloadData() {
-        viewController?.displayTableReloadData()
+    func presentWeather(res: GetWeatherHomeElement) {
+        viewController?.presentWeather(res: res)
     }
 
-    func presentWeatherDetail() {
-        viewController?.displayWeatherDetail()
-    }
 }

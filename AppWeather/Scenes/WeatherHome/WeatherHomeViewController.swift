@@ -13,16 +13,22 @@
 import UIKit
 
 protocol WeatherHomeDisplayLogic: class {
-    func displayTableReloadData()
-    func displayWeatherDetail()
+    func presentWeather(res: GetWeatherHomeElement)
 }
 
 final class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic {
-    @IBOutlet private var tableView: UITableView!
-    @IBOutlet var searchBar: UISearchBar!
-    var interactor: WeatherHomeBusinessLogic?
+    @IBOutlet var cityTextField: UITextField!
+    @IBOutlet var imageWeather: UIImageView!
+    @IBOutlet var tempLabel: UILabel!
+    @IBOutlet var humidityLabel: UILabel!
+    @IBOutlet var convertBtn: UIButton!
 
+    var interactor: WeatherHomeBusinessLogic?
     var router: (NSObjectProtocol & WeatherHomeRoutingLogic & WeatherHomeDataPassing)?
+
+    var input: String?
+    var typeTemp: String? = "f"
+    var weather: GetWeatherHomeElement?
 
     // MARK: Object lifecycle
 
@@ -35,8 +41,6 @@ final class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic
         super.init(coder: aDecoder)
         setup()
     }
-
-    // MARK: Setup
 
     private func setup() {
         let viewController = self
@@ -55,24 +59,70 @@ final class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setView()
-        interactor?.fetch()
+        setPage()
+        cityTextField.delegate = self
+        cityTextField.addTarget(self, action: #selector(textChange(textField:)), for: .editingChanged)
     }
 
-    // Private
-    private func setView() {
+    private func setPage() {
         title = "Weather"
+        convertBtn.isHidden = true
+    }
 
+    @IBAction func onClick(_ sender: Any) {
+        interactor?.fetch(city: input ?? "")
+    }
+
+    @IBAction func CelsiusToFahren(_ sender: Any) {
+        let celsius = calculatekelvin(kelvin: weather?.main?.temp ?? 0)
+        let fahren = calculateFahren(celsius: celsius)
+
+        if typeTemp == "c" {
+            tempLabel.text = "temp : \(String(format: "%.0f", celsius)) celsius"
+            typeTemp = "f"
+        } else {
+            tempLabel.text = "temp : \(String(format: "%.0f", fahren)) fahrenheit"
+            typeTemp = "c"
+        }
+    }
+
+    func calculateCelsius(fahren: Double) -> Double {
+        var celsius: Double
+        celsius = (fahren - 32) * 5 / 9
+        return celsius
+    }
+
+    func calculateFahren(celsius: Double) -> Double {
+        var fahren: Double
+        fahren = celsius * 9 / 5 + 32
+        return fahren
+    }
+
+    func calculatekelvin(kelvin: Double) -> Double {
+        var celsius: Double
+        celsius = kelvin - 273.15
+        return celsius
     }
 }
 
-// MARK: WeatherHomeDisplayLogic
+extension WeatherHomeViewController: UITextFieldDelegate {
+    @objc func textChange(textField: UITextField) {
+        input = textField.text
+    }
+}
 
 extension WeatherHomeViewController {
-    func displayTableReloadData() {
-//        tableView.reloadData()
-    }
-
-    func displayWeatherDetail() {
+    func presentWeather(res: GetWeatherHomeElement) {
+        weather = res
+        convertBtn.isHidden = false
+        if let kelvinTemp = weather?.main?.temp as? Double {
+            typeTemp = "f"
+            let celsiusTemp = kelvinTemp - 273.15
+            tempLabel.text = "temp : \(String(format: "%.0f", celsiusTemp)) celsius"
+        }
+        if let humidity = weather?.main?.humidity as? Double {
+            humidityLabel.text = "humidity : \(humidity) %"
+        }
+        imageWeather.image = UIImage(named: "\(weather?.weather?[0].icon ?? "")")
     }
 }

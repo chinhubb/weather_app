@@ -14,7 +14,7 @@ import RxSwift
 import UIKit
 
 protocol WeatherHomeWorkable {
-    func getHomeWeather() -> Single<GetWeatherHomeResponse>
+    func getHomeWeather(city: String) -> Single<GetWeatherHomeResponse>
 }
 
 final class WeatherHomeWorker: WeatherHomeWorkable {
@@ -23,7 +23,7 @@ final class WeatherHomeWorker: WeatherHomeWorkable {
         self.getHomeWeatherUsecase = getHomeWeatherUsecase
     }
 
-    func getHomeWeather() -> Single<GetWeatherHomeResponse> {
-        return getHomeWeatherUsecase.execute()
+    func getHomeWeather(city: String) -> Single<GetWeatherHomeResponse> {
+        return getHomeWeatherUsecase.execute(city: city)
     }
 }

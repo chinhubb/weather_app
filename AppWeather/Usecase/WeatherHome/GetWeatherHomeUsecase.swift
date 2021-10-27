@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol GetHomeWeatherUsecase {
-    func execute() -> Single<GetWeatherHomeResponse>
+    func execute(city:String) -> Single<GetWeatherHomeResponse>
 }
 
 final class GetHomeWeatherUsecaseImpl: GetHomeWeatherUsecase {
@@ -18,9 +18,9 @@ final class GetHomeWeatherUsecaseImpl: GetHomeWeatherUsecase {
         weatherHomeRepository = repository
     }
 
-    func execute() -> Single<GetWeatherHomeResponse> {
+    func execute(city:String) -> Single<GetWeatherHomeResponse> {
         var request = GetWeatherHomeRequest()
-        request.city = "Bangkok"
+        request.city = city
         return weatherHomeRepository.getHomeWeather(request: request)
     }
 }

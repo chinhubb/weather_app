@@ -8,72 +8,53 @@
 import Foundation
 
 struct GetWeatherHomeElement: Codable {
-    var timezone: Int? // total_results
-    var results: [GetWeatherHomeItemElement]?
+    var id: Int?
     var name: String?
+    var main: GetWeatherHomeItemElement?
+    var weather: [GetStatusWeatherItemElement]?
 
     init() {
-        timezone = nil
-        results = nil
+        id = nil
         name = nil
+        main = nil
+        weather = nil
     }
 
     private enum CodingKeys: String, CodingKey {
-        case timezone
-        case results, name
+        case name, main, id, weather
     }
 }
 
 struct GetWeatherHomeItemElement: Codable {
-    var id: Int?
-    var adult: Bool?
-    var backdropPath: String? // backdrop_path
-    var genreIds: [Int]? // genre_ids
-
-    var originalLanguage: String? // original_language
-    var originalTitle: String? // original_title
-    var overview: String?
-    var popularity: Double?
-
-    var posterPath: String? // poster_path
-    var releaseDate: String? // release_date
-
-    var title: String?
-
-    var voteAverage: Double? // vote_average
-    var voteCount: Int? // vote_count
+    var temp: Double?
+    var humidity: Double?
 
     init() {
-        id = nil
-        adult = nil
-        backdropPath = nil
-        genreIds = nil
-
-        originalLanguage = nil
-        originalTitle = nil
-        overview = ""
-        popularity = nil
-
-        posterPath = nil
-        releaseDate = nil
-        title = nil
-
-        voteAverage = nil
-        voteCount = nil
+        temp = nil
+        humidity = nil
     }
 
     private enum CodingKeys: String, CodingKey {
-        case backdropPath = "backdrop_path"
-        case genreIds = "genre_ids"
-        case originalLanguage = "original_language"
-        case originalTitle = "original_title"
-        case posterPath = "poster_path"
-        case releaseDate = "release_date"
-        case voteAverage = "vote_average"
-        case voteCount = "vote_count"
-        case id, adult, title, overview, popularity
+        case temp, humidity
+    }
+}
+
+struct GetStatusWeatherItemElement: Codable {
+    var main: String?
+    var description: String?
+    var icon : String?
+
+    init() {
+        main = nil
+        description = nil
+        icon = nil
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case main, description, icon
     }
 }
 
 typealias GetWeatherHomeResponse = GetWeatherHomeElement
 typealias GetWeatherHomeItemModel = GetWeatherHomeItemElement
+typealias GetStatusWeatherHomeItemModel = GetStatusWeatherItemElement
