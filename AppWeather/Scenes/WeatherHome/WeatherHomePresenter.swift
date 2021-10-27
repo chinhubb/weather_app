@@ -13,21 +13,18 @@
 import UIKit
 
 protocol WeatherHomePresentationLogic {
-    func presentSomething(response: WeatherHome.Something.Response)
+    func presentTableReloadData()
+    func presentWeatherDetail()
 }
 
-class WeatherHomePresenter: WeatherHomePresentationLogic {
+final class WeatherHomePresenter: WeatherHomePresentationLogic {
     weak var viewController: WeatherHomeDisplayLogic?
 
-    // MARK: Parse and calc respnse from WeatherHomeInteractor and send simple view model to WeatherHomeViewController to be displayed
-
-    func presentSomething(response: WeatherHome.Something.Response) {
-        let viewModel = WeatherHome.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentTableReloadData() {
+        viewController?.displayTableReloadData()
     }
-//
-//    func presentSomethingElse(response: WeatherHome.SomethingElse.Response) {
-//        let viewModel = WeatherHome.SomethingElse.ViewModel()
-//        viewController?.displaySomethingElse(viewModel: viewModel)
-//    }
+
+    func presentWeatherDetail() {
+        viewController?.displayWeatherDetail()
+    }
 }

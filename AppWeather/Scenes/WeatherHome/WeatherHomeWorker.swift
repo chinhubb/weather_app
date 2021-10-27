@@ -10,14 +10,20 @@
 //  see http://clean-swift.com
 //
 
+import RxSwift
 import UIKit
 
-class WeatherHomeWorker {
-    func doSomeWork() {
-        
+protocol WeatherHomeWorkable {
+    func getHomeWeather() -> Single<GetWeatherHomeResponse>
+}
+
+final class WeatherHomeWorker: WeatherHomeWorkable {
+    private let getHomeWeatherUsecase: GetHomeWeatherUsecase!
+    init(getHomeWeatherUsecase: GetHomeWeatherUsecase? = GetHomeWeatherUsecaseImpl()) {
+        self.getHomeWeatherUsecase = getHomeWeatherUsecase
     }
-//    
-//    func doSomeOtherWork() {
-//
-//    }
+
+    func getHomeWeather() -> Single<GetWeatherHomeResponse> {
+        return getHomeWeatherUsecase.execute()
+    }
 }

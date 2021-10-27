@@ -12,43 +12,15 @@
 
 import UIKit
 
-enum WeatherHome
-{
-    // MARK: Use cases
-
-    enum Something
-    {
-        struct Request
-        {
-
+enum WeatherHome {
+    enum PresentWeatherDetail {
+        struct Request {
         }
-
-        struct Response
-        {
-
+        struct Response {
+            var cityID: Int?
         }
-
-        struct ViewModel
-        {
-
+        struct ViewModel {
+            var cityID: Int?
         }
     }
-    
-//    enum SomethingElse
-//    {
-//        struct Request
-//        {
-//
-//        }
-//
-//        struct Response
-//        {
-//
-//        }
-//
-//        struct ViewModel
-//        {
-//
-//        }
-//    }
 }

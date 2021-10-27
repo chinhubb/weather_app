@@ -12,14 +12,16 @@
 
 import UIKit
 
-protocol WeatherHomeDisplayLogic: class
-{
-    func displaySomething(viewModel: WeatherHome.Something.ViewModel)
-//    func displaySomethingElse(viewModel: WeatherHome.SomethingElse.ViewModel)
+protocol WeatherHomeDisplayLogic: class {
+    func displayTableReloadData()
+    func displayWeatherDetail()
 }
 
-class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic {
+final class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic {
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet var searchBar: UISearchBar!
     var interactor: WeatherHomeBusinessLogic?
+
     var router: (NSObjectProtocol & WeatherHomeRoutingLogic & WeatherHomeDataPassing)?
 
     // MARK: Object lifecycle
@@ -34,7 +36,7 @@ class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic {
         setup()
     }
 
-    // MARK: - Setup Clean Code Design Pattern 
+    // MARK: Setup
 
     private func setup() {
         let viewController = self
@@ -49,56 +51,28 @@ class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic {
         router.dataStore = interactor
     }
 
-    // MARK: - Routing
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-
-    // MARK: - View lifecycle
+    // MARK: View lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
-//        doSomethingElse()
+        setView()
+        interactor?.fetch()
     }
-    
-    //MARK: - receive events from UI
-    
-    //@IBOutlet weak var nameTextField: UITextField!
-//
-//    @IBAction func someButtonTapped(_ sender: Any) {
-//
-//    }
-//
-//    @IBAction func otherButtonTapped(_ sender: Any) {
-//
-//    }
-    
-    // MARK: - request data from WeatherHomeInteractor
 
-    func doSomething() {
-        let request = WeatherHome.Something.Request()
-        interactor?.doSomething(request: request)
+    // Private
+    private func setView() {
+        title = "Weather"
+
     }
-//
-//    func doSomethingElse() {
-//        let request = WeatherHome.SomethingElse.Request()
-//        interactor?.doSomethingElse(request: request)
-//    }
+}
 
-    // MARK: - display view model from WeatherHomePresenter
+// MARK: WeatherHomeDisplayLogic
 
-    func displaySomething(viewModel: WeatherHome.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+extension WeatherHomeViewController {
+    func displayTableReloadData() {
+//        tableView.reloadData()
     }
-//
-//    func displaySomethingElse(viewModel: WeatherHome.SomethingElse.ViewModel) {
-//        // do sometingElse with viewModel
-//    }
+
+    func displayWeatherDetail() {
+    }
 }

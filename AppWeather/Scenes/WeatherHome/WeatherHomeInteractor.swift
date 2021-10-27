@@ -10,37 +10,68 @@
 //  see http://clean-swift.com
 //
 
+import RxSwift
 import UIKit
 
 protocol WeatherHomeBusinessLogic {
-    func doSomething(request: WeatherHome.Something.Request)
-//    func doSomethingElse(request: WeatherHome.SomethingElse.Request)
+    func fetch()
+    func openWeatherDetail(indexPath: IndexPath)
+
+    // DataSource
+    func getDataSourceCount() -> Int
+    func getDataSourceItem(indexPath: IndexPath) -> GetWeatherHomeItemModel
 }
 
 protocol WeatherHomeDataStore {
-    //var name: String { get set }
+    var cityID: Int? { get set }
 }
 
-class WeatherHomeInteractor: WeatherHomeBusinessLogic, WeatherHomeDataStore {
+final class WeatherHomeInteractor: WeatherHomeBusinessLogic, WeatherHomeDataStore {
     var presenter: WeatherHomePresentationLogic?
-    var worker: WeatherHomeWorker?
-    //var name: String = ""
+    lazy var worker: WeatherHomeWorkable? = {
+        WeatherHomeWorker()
+    }()
 
-    // MARK: Do something (and send response to WeatherHomePresenter)
+    var cityID: Int?
 
-    func doSomething(request: WeatherHome.Something.Request) {
-        worker = WeatherHomeWorker()
-        worker?.doSomeWork()
+    // RX
+    fileprivate var disposeBag = DisposeBag()
 
-        let response = WeatherHome.Something.Response()
-        presenter?.presentSomething(response: response)
+    // Store
+    private var dataSource: [GetWeatherHomeItemModel] = []
+    private var isLoading: Bool = false
+
+    // DataSource
+    func getDataSourceCount() -> Int {
+        return dataSource.count
     }
+
+    func getDataSourceItem(indexPath: IndexPath) -> GetWeatherHomeItemModel {
+        return dataSource[indexPath.row]
+    }
+
+    func fetch() {
+        isLoading = true
+        worker?.getHomeWeather().subscribe(onSuccess: { [weak self] response in
+//            if let items = response.name {
+            ////                self?.dataSource.append(contentsOf: items)
+            ////                self?.presenter?.presentTableReloadData()
 //
-//    func doSomethingElse(request: WeatherHome.SomethingElse.Request) {
-//        worker = WeatherHomeWorker()
-//        worker?.doSomeOtherWork()
-//
-//        let response = WeatherHome.SomethingElse.Response()
-//        presenter?.presentSomethingElse(response: response)
-//    }
+//                print("odfsf",items)
+//            }
+
+            print("kdopfs", response.name, response.timezone)
+            self?.isLoading = false
+        }, onFailure: { [weak self] error in
+            self?.presenter?.presentTableReloadData()
+            self?.isLoading = false
+            print("Error: \(error)")
+        }, onDisposed: nil).disposed(by: disposeBag)
+    }
+
+    func openWeatherDetail(indexPath: IndexPath) {
+        let weather = getDataSourceItem(indexPath: indexPath)
+        cityID = weather.id
+        presenter?.presentWeatherDetail()
+    }
 }
