@@ -13,7 +13,6 @@
 import UIKit
 
 @objc protocol ForeCastHomeRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
 }
 
 protocol ForeCastHomeDataPassing {

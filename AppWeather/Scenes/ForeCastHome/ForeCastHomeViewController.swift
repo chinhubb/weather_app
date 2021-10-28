@@ -12,19 +12,21 @@
 
 import UIKit
 
-protocol ForeCastHomeDisplayLogic: class
-{
-    func ForeCast(res:GetWeatherHomeElement)
+protocol ForeCastHomeDisplayLogic: class {
+    func display(weather: GetWeatherHomeElement?)
 
-    func display(weather:GetWeatherHomeElement?)
+    func displayTableReloadData(res:[GetForeCastHomeItemElement])  -> [GetForeCastHomeItemElement]
 }
 
 class ForeCastHomeViewController: UIViewController, ForeCastHomeDisplayLogic {
+    
     var interactor: ForeCastHomeBusinessLogic?
     var router: (NSObjectProtocol & ForeCastHomeRoutingLogic & ForeCastHomeDataPassing)?
-    
-    var fore: GetWeatherHomeElement?
 
+    @IBOutlet var tableview: UITableView!
+
+    var fore: GetWeatherHomeElement?
+    var list:[GetForeCastHomeItemElement]?
 
     // MARK: Object lifecycle
 
@@ -38,7 +40,7 @@ class ForeCastHomeViewController: UIViewController, ForeCastHomeDisplayLogic {
         setup()
     }
 
-    // MARK: - Setup Clean Code Design Pattern 
+    // MARK: - Setup Clean Code Design Pattern
 
     private func setup() {
         let viewController = self
@@ -57,18 +59,41 @@ class ForeCastHomeViewController: UIViewController, ForeCastHomeDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        interactor?.getForeCastDays(city: "")
+        registerTable()
+        interactor?.getForeCastDays(city: "london")
     }
-    
-    func display(weather:GetWeatherHomeElement?)
-    {
+
+    private func registerTable() {
+        tableview.delegate = self
+        tableview.register(UINib(nibName: ForeCastTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: ForeCastTableViewCell.identifier)
+    }
+
+    func display(weather: GetWeatherHomeElement?) {
         title = weather?.name
-        print("lopdfkosdf",weather?.name ?? "")
     }
 }
- 
+
 extension ForeCastHomeViewController {
-    func ForeCast(res:GetWeatherHomeElement){
-        fore = res
+    func displayTableReloadData(res:[GetForeCastHomeItemElement]) -> [GetForeCastHomeItemElement]{
+
+        return res
+    }
+}
+
+extension ForeCastHomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return list?.count ?? 0
+        
+        print("dspofks",list?.count)
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ForeCastTableViewCell.identifier) as? ForeCastTableViewCell {            cell.render(viewModel: (list?[indexPath.row])!)
+            
+            print("podskfopsf",list?[indexPath.row].date)
+            
+            return cell
+        }
+        return UITableViewCell()
     }
 }

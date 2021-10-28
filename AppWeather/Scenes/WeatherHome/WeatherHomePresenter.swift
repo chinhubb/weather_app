@@ -15,8 +15,7 @@ import UIKit
 protocol WeatherHomePresentationLogic {
     func presentWeather(res: GetWeatherHomeElement)
     
-    func presentForeCast()
-
+    func presentMovieDetail()
 }
 
 final class WeatherHomePresenter: WeatherHomePresentationLogic {
@@ -25,8 +24,7 @@ final class WeatherHomePresenter: WeatherHomePresentationLogic {
         viewController?.presentWeather(res: res)
     }
     
-    func presentForeCast(){
-        viewController?.displayForeCast()
+    func presentMovieDetail() {
+        viewController?.displayMovieDetail()
     }
-
 }

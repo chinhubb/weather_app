@@ -41,6 +41,8 @@
 		E9D78413272A4605004E8193 /* ForeCastHomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D7840D272A4605004E8193 /* ForeCastHomeModels.swift */; };
 		E9D78414272A4605004E8193 /* ForeCastHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D7840E272A4605004E8193 /* ForeCastHomeViewController.swift */; };
 		E9D78415272A4605004E8193 /* ForeCastHomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D7840F272A4605004E8193 /* ForeCastHomeInteractor.swift */; };
+		E9D78418272AAF58004E8193 /* ForeCastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D78416272AAF57004E8193 /* ForeCastTableViewCell.swift */; };
+		E9D78419272AAF58004E8193 /* ForeCastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D78417272AAF57004E8193 /* ForeCastTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +79,8 @@
 		E9D7840D272A4605004E8193 /* ForeCastHomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCastHomeModels.swift; sourceTree = "<group>"; };
 		E9D7840E272A4605004E8193 /* ForeCastHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCastHomeViewController.swift; sourceTree = "<group>"; };
 		E9D7840F272A4605004E8193 /* ForeCastHomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCastHomeInteractor.swift; sourceTree = "<group>"; };
+		E9D78416272AAF57004E8193 /* ForeCastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCastTableViewCell.swift; sourceTree = "<group>"; };
+		E9D78417272AAF57004E8193 /* ForeCastTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForeCastTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +292,8 @@
 		E9D78409272A45EF004E8193 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E9D78416272AAF57004E8193 /* ForeCastTableViewCell.swift */,
+				E9D78417272AAF57004E8193 /* ForeCastTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -358,6 +364,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9D78419272AAF58004E8193 /* ForeCastTableViewCell.xib in Resources */,
 				E9D783BD27286D08004E8193 /* LaunchScreen.storyboard in Resources */,
 				E9D783BA27286D08004E8193 /* Assets.xcassets in Resources */,
 				E9D783B827286D07004E8193 /* Main.storyboard in Resources */,
@@ -375,6 +382,7 @@
 				E9D783DB27286F1F004E8193 /* NetworkConfig.swift in Sources */,
 				E9D78415272A4605004E8193 /* ForeCastHomeInteractor.swift in Sources */,
 				E9D783F727287D3C004E8193 /* WeatherHomeModels.swift in Sources */,
+				E9D78418272AAF58004E8193 /* ForeCastTableViewCell.swift in Sources */,
 				E9D783F827287D3C004E8193 /* WeatherHomeViewController.swift in Sources */,
 				E9D78414272A4605004E8193 /* ForeCastHomeViewController.swift in Sources */,
 				E9D783E42728788C004E8193 /* WeatherHomeAPI.swift in Sources */,

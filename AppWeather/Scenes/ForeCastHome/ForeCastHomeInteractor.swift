@@ -18,10 +18,14 @@ protocol ForeCastHomeBusinessLogic {
 }
 
 protocol ForeCastHomeDataStore {
+    var movieID: Int? { get set }
     var data: GetWeatherHomeElement? { get set }
 }
 
 class ForeCastHomeInteractor: ForeCastHomeBusinessLogic, ForeCastHomeDataStore {
+  
+    var movieID: Int?
+    
     var data: GetWeatherHomeElement?
 
     var presenter: ForeCastHomePresentationLogic?
@@ -29,19 +33,17 @@ class ForeCastHomeInteractor: ForeCastHomeBusinessLogic, ForeCastHomeDataStore {
         ForeCastHomeWorker()
     }()
 
+    private var list: [GetForeCastHomeItemModel] = []
+
+
     fileprivate var disposeBag = DisposeBag()
 
     func getForeCastDays(city: String) {
         worker?.getForeCast(city: city).subscribe(onSuccess: { [weak self] response in
-//            print("odsfs", response.list)
+//            print("res_list", response.list)
+
         }, onFailure: { [weak self] error in
             print("Error: \(error)")
         }, onDisposed: nil).disposed(by: disposeBag)
     }
-    
-    func getdata()
-    {
-        presenter?.presentShowPage1(weather:data)
-    }
-
 }

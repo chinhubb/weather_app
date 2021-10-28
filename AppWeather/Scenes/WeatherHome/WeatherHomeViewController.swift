@@ -14,8 +14,8 @@ import UIKit
 
 protocol WeatherHomeDisplayLogic: class {
     func presentWeather(res: GetWeatherHomeElement)
-    func displayForeCast()
 
+    func displayMovieDetail()
 }
 
 final class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic {
@@ -69,10 +69,6 @@ final class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic
     private func setPage() {
         title = "Weather"
         convertBtn.isHidden = true
-    }
-    
-    func displayForeCast() {
-        performSegue(withIdentifier: "ForeCastPath", sender: self)
     }
 
 
@@ -130,5 +126,9 @@ extension WeatherHomeViewController {
             humidityLabel.text = "humidity : \(humidity) %"
         }
         imageWeather.image = UIImage(named: "\(weather?.weather?[0].icon ?? "")")
+    }
+    
+    func displayMovieDetail() {
+        router?.routeToMovieDetail()
     }
 }
