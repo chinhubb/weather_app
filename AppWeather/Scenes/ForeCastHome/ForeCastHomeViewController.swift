@@ -87,6 +87,10 @@ extension ForeCastHomeViewController: UITableViewDelegate, UITableViewDataSource
         return interactor?.getDataSourceCount() ?? 0
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return ForeCastTableViewCell.cellHeight
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ForeCastTableViewCell.identifier) as? ForeCastTableViewCell {
             if let viewModel = interactor?.getDataSourceItem(indexPath: indexPath) {

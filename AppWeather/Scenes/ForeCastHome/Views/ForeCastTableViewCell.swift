@@ -10,6 +10,7 @@ import UIKit
 
 class ForeCastTableViewCell: UITableViewCell {
     static let identifier = "ForeCastTableViewCell"
+    static let cellHeight: CGFloat = 150.0
     @IBOutlet var dayLabel: UILabel!
     @IBOutlet var templabel: UILabel!
     @IBOutlet var humiditylabel: UILabel!
@@ -34,8 +35,6 @@ class ForeCastTableViewCell: UITableViewCell {
 
         templabel.text = String(format: "%.0f", caltempMax)
         humiditylabel.text = "\(humidityDouble ?? 0.0) %"
-//        iconimage.image = UIImage(named: "\(icon ?? "")")
-        
         iconimage.kf.setImage(with: urlIcon)
     }
 }
