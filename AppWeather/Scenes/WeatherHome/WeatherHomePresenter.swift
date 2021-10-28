@@ -14,12 +14,19 @@ import UIKit
 
 protocol WeatherHomePresentationLogic {
     func presentWeather(res: GetWeatherHomeElement)
+    
+    func presentForeCast()
+
 }
 
 final class WeatherHomePresenter: WeatherHomePresentationLogic {
     weak var viewController: WeatherHomeDisplayLogic?
     func presentWeather(res: GetWeatherHomeElement) {
         viewController?.presentWeather(res: res)
+    }
+    
+    func presentForeCast(){
+        viewController?.displayForeCast()
     }
 
 }

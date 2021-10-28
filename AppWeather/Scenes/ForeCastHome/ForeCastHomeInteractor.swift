@@ -10,37 +10,38 @@
 //  see http://clean-swift.com
 //
 
+import RxSwift
 import UIKit
 
 protocol ForeCastHomeBusinessLogic {
-    func doSomething(request: ForeCastHome.Something.Request)
-//    func doSomethingElse(request: ForeCastHome.SomethingElse.Request)
+    func getForeCastDays(city: String)
 }
 
 protocol ForeCastHomeDataStore {
-    //var name: String { get set }
+    var data: GetWeatherHomeElement? { get set }
 }
 
 class ForeCastHomeInteractor: ForeCastHomeBusinessLogic, ForeCastHomeDataStore {
+    var data: GetWeatherHomeElement?
+
     var presenter: ForeCastHomePresentationLogic?
-    var worker: ForeCastHomeWorker?
-    //var name: String = ""
+    lazy var worker: ForeCastHomeWorkable? = {
+        ForeCastHomeWorker()
+    }()
 
-    // MARK: Do something (and send response to ForeCastHomePresenter)
+    fileprivate var disposeBag = DisposeBag()
 
-    func doSomething(request: ForeCastHome.Something.Request) {
-        worker = ForeCastHomeWorker()
-        worker?.doSomeWork()
-
-        let response = ForeCastHome.Something.Response()
-        presenter?.presentSomething(response: response)
+    func getForeCastDays(city: String) {
+        worker?.getForeCast(city: city).subscribe(onSuccess: { [weak self] response in
+//            print("odsfs", response.list)
+        }, onFailure: { [weak self] error in
+            print("Error: \(error)")
+        }, onDisposed: nil).disposed(by: disposeBag)
     }
-//
-//    func doSomethingElse(request: ForeCastHome.SomethingElse.Request) {
-//        worker = ForeCastHomeWorker()
-//        worker?.doSomeOtherWork()
-//
-//        let response = ForeCastHome.SomethingElse.Response()
-//        presenter?.presentSomethingElse(response: response)
-//    }
+    
+    func getdata()
+    {
+        presenter?.presentShowPage1(weather:data)
+    }
+
 }

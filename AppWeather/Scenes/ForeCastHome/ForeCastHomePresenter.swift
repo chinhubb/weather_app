@@ -13,21 +13,21 @@
 import UIKit
 
 protocol ForeCastHomePresentationLogic {
-    func presentSomething(response: ForeCastHome.Something.Response)
+    func presentFore(res:GetWeatherHomeElement?)
+    
+    func presentShowPage1(weather:GetWeatherHomeElement?)
 }
 
 class ForeCastHomePresenter: ForeCastHomePresentationLogic {
+   
+    
     weak var viewController: ForeCastHomeDisplayLogic?
 
-    // MARK: Parse and calc respnse from ForeCastHomeInteractor and send simple view model to ForeCastHomeViewController to be displayed
-
-    func presentSomething(response: ForeCastHome.Something.Response) {
-        let viewModel = ForeCastHome.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentFore(res: GetWeatherHomeElement?) {
+        viewController?.ForeCast(res: res!)
     }
-//
-//    func presentSomethingElse(response: ForeCastHome.SomethingElse.Response) {
-//        let viewModel = ForeCastHome.SomethingElse.ViewModel()
-//        viewController?.displaySomethingElse(viewModel: viewModel)
-//    }
+    
+    func presentShowPage1(weather:GetWeatherHomeElement?) {
+        viewController?.display(weather: weather)
+    }
 }

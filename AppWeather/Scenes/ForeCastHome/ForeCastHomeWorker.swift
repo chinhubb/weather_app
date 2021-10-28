@@ -11,13 +11,19 @@
 //
 
 import UIKit
+import RxSwift
 
-class ForeCastHomeWorker {
-    func doSomeWork() {
-        
+protocol ForeCastHomeWorkable {
+    func getForeCast(city: String) -> Single<GetForeCastHomeResponse>
+}
+
+final class ForeCastHomeWorker: ForeCastHomeWorkable {
+    private let getForeCastUsecase: GetForeCastHomeUsecase!
+    init(getForeCastUsecase: GetForeCastHomeUsecase? = GetForeCastHomeUsecaseImpl()) {
+        self.getForeCastUsecase = getForeCastUsecase
     }
-//    
-//    func doSomeOtherWork() {
-//
-//    }
+
+    func getForeCast(city: String) -> Single<GetForeCastHomeResponse> {
+        return getForeCastUsecase.execute(city: city)
+    }
 }

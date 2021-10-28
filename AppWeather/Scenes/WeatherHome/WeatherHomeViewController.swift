@@ -14,6 +14,8 @@ import UIKit
 
 protocol WeatherHomeDisplayLogic: class {
     func presentWeather(res: GetWeatherHomeElement)
+    func displayForeCast()
+
 }
 
 final class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic {
@@ -68,6 +70,11 @@ final class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic
         title = "Weather"
         convertBtn.isHidden = true
     }
+    
+    func displayForeCast() {
+        performSegue(withIdentifier: "ForeCastPath", sender: self)
+    }
+
 
     @IBAction func onClick(_ sender: Any) {
         interactor?.fetch(city: input ?? "")
@@ -76,7 +83,6 @@ final class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic
     @IBAction func CelsiusToFahren(_ sender: Any) {
         let celsius = calculatekelvin(kelvin: weather?.main?.temp ?? 0)
         let fahren = calculateFahren(celsius: celsius)
-
         if typeTemp == "c" {
             tempLabel.text = "temp : \(String(format: "%.0f", celsius)) celsius"
             typeTemp = "f"

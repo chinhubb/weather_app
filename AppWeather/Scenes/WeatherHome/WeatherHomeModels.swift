@@ -17,10 +17,10 @@ enum WeatherHome {
         struct Request {
         }
         struct Response {
-            var cityID: Int?
+            var city: String?
         }
         struct ViewModel {
-            var cityID: Int?
+            var city: String?
         }
     }
 }

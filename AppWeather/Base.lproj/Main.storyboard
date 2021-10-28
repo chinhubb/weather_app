@@ -83,7 +83,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ige-gP-su5">
-                        <barButtonItem key="rightBarButtonItem" title="5 days forecasr" id="nYw-SL-ibP"/>
+                        <barButtonItem key="rightBarButtonItem" title="5 days forecasr" id="nYw-SL-ibP">
+                            <connections>
+                                <segue destination="YMz-rg-YcL" kind="show" identifier="ForeCastPath" id="37l-ZL-7oZ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="cityTextField" destination="hNp-LG-9Zv" id="JCO-4p-Ut1"/>
@@ -95,6 +99,22 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1944.9275362318842" y="-188.16964285714286"/>
+        </scene>
+        <!--Fore Cast Home View Controller-->
+        <scene sceneID="AtL-T6-sa0">
+            <objects>
+                <viewController storyboardIdentifier="ForeCastHomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YMz-rg-YcL" customClass="ForeCastHomeViewController" customModule="AppWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lFZ-sK-fzk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="FrE-eR-oXs"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Wld-Q6-OJJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1z3-2s-e72" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2929" y="-188"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QoI-G2-T8v">

@@ -31,6 +31,16 @@
 		E9D783F827287D3C004E8193 /* WeatherHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D783F227287D3C004E8193 /* WeatherHomeViewController.swift */; };
 		E9D783F927287D3C004E8193 /* WeatherHomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D783F327287D3C004E8193 /* WeatherHomeInteractor.swift */; };
 		E9D783FD27292EA7004E8193 /* GetWeatherHomeUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D783FC27292EA7004E8193 /* GetWeatherHomeUsecase.swift */; };
+		E9D783FF2729DA84004E8193 /* WeatherForeCastAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D783FE2729DA84004E8193 /* WeatherForeCastAPI.swift */; };
+		E9D784012729DAFC004E8193 /* GetForeCastHomeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D784002729DAFC004E8193 /* GetForeCastHomeResponse.swift */; };
+		E9D784042729DD09004E8193 /* ForeCastHomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D784032729DD09004E8193 /* ForeCastHomeRepository.swift */; };
+		E9D78407272A4555004E8193 /* GetForeCastHomeUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D78406272A4555004E8193 /* GetForeCastHomeUsecase.swift */; };
+		E9D78410272A4605004E8193 /* ForeCastHomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D7840A272A4605004E8193 /* ForeCastHomePresenter.swift */; };
+		E9D78411272A4605004E8193 /* ForeCastHomeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D7840B272A4605004E8193 /* ForeCastHomeWorker.swift */; };
+		E9D78412272A4605004E8193 /* ForeCastHomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D7840C272A4605004E8193 /* ForeCastHomeRouter.swift */; };
+		E9D78413272A4605004E8193 /* ForeCastHomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D7840D272A4605004E8193 /* ForeCastHomeModels.swift */; };
+		E9D78414272A4605004E8193 /* ForeCastHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D7840E272A4605004E8193 /* ForeCastHomeViewController.swift */; };
+		E9D78415272A4605004E8193 /* ForeCastHomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D7840F272A4605004E8193 /* ForeCastHomeInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +67,16 @@
 		E9D783F227287D3C004E8193 /* WeatherHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHomeViewController.swift; sourceTree = "<group>"; };
 		E9D783F327287D3C004E8193 /* WeatherHomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHomeInteractor.swift; sourceTree = "<group>"; };
 		E9D783FC27292EA7004E8193 /* GetWeatherHomeUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWeatherHomeUsecase.swift; sourceTree = "<group>"; };
+		E9D783FE2729DA84004E8193 /* WeatherForeCastAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForeCastAPI.swift; sourceTree = "<group>"; };
+		E9D784002729DAFC004E8193 /* GetForeCastHomeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetForeCastHomeResponse.swift; sourceTree = "<group>"; };
+		E9D784032729DD09004E8193 /* ForeCastHomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCastHomeRepository.swift; sourceTree = "<group>"; };
+		E9D78406272A4555004E8193 /* GetForeCastHomeUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetForeCastHomeUsecase.swift; sourceTree = "<group>"; };
+		E9D7840A272A4605004E8193 /* ForeCastHomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCastHomePresenter.swift; sourceTree = "<group>"; };
+		E9D7840B272A4605004E8193 /* ForeCastHomeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCastHomeWorker.swift; sourceTree = "<group>"; };
+		E9D7840C272A4605004E8193 /* ForeCastHomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCastHomeRouter.swift; sourceTree = "<group>"; };
+		E9D7840D272A4605004E8193 /* ForeCastHomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCastHomeModels.swift; sourceTree = "<group>"; };
+		E9D7840E272A4605004E8193 /* ForeCastHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCastHomeViewController.swift; sourceTree = "<group>"; };
+		E9D7840F272A4605004E8193 /* ForeCastHomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeCastHomeInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				E9D783E527287999004E8193 /* GetWeatherHomeResponse.swift */,
+				E9D784002729DAFC004E8193 /* GetForeCastHomeResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -165,6 +186,7 @@
 			children = (
 				E9D783D727286EC1004E8193 /* Network.swift */,
 				E9D783E32728788C004E8193 /* WeatherHomeAPI.swift */,
+				E9D783FE2729DA84004E8193 /* WeatherForeCastAPI.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -180,6 +202,7 @@
 		E9D783E727287C38004E8193 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				E9D784022729DCF0004E8193 /* ForeCastHome */,
 				E9D783E827287C4A004E8193 /* WeatherHome */,
 			);
 			path = Repository;
@@ -196,6 +219,7 @@
 		E9D783EB27287D0B004E8193 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				E9D78408272A45DC004E8193 /* ForeCastHome */,
 				E9D783EC27287D17004E8193 /* WeatherHome */,
 			);
 			path = Scenes;
@@ -204,7 +228,6 @@
 		E9D783EC27287D17004E8193 /* WeatherHome */ = {
 			isa = PBXGroup;
 			children = (
-				E9D783ED27287D24004E8193 /* Views */,
 				E9D783EE27287D3C004E8193 /* WeatherHomePresenter.swift */,
 				E9D783EF27287D3C004E8193 /* WeatherHomeWorker.swift */,
 				E9D783F027287D3C004E8193 /* WeatherHomeRouter.swift */,
@@ -215,16 +238,10 @@
 			path = WeatherHome;
 			sourceTree = "<group>";
 		};
-		E9D783ED27287D24004E8193 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		E9D783FA27292E6F004E8193 /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
+				E9D78405272A4538004E8193 /* ForeCastHome */,
 				E9D783FB27292E8E004E8193 /* WeatherHome */,
 			);
 			path = Usecase;
@@ -236,6 +253,43 @@
 				E9D783FC27292EA7004E8193 /* GetWeatherHomeUsecase.swift */,
 			);
 			path = WeatherHome;
+			sourceTree = "<group>";
+		};
+		E9D784022729DCF0004E8193 /* ForeCastHome */ = {
+			isa = PBXGroup;
+			children = (
+				E9D784032729DD09004E8193 /* ForeCastHomeRepository.swift */,
+			);
+			path = ForeCastHome;
+			sourceTree = "<group>";
+		};
+		E9D78405272A4538004E8193 /* ForeCastHome */ = {
+			isa = PBXGroup;
+			children = (
+				E9D78406272A4555004E8193 /* GetForeCastHomeUsecase.swift */,
+			);
+			path = ForeCastHome;
+			sourceTree = "<group>";
+		};
+		E9D78408272A45DC004E8193 /* ForeCastHome */ = {
+			isa = PBXGroup;
+			children = (
+				E9D78409272A45EF004E8193 /* Views */,
+				E9D7840A272A4605004E8193 /* ForeCastHomePresenter.swift */,
+				E9D7840B272A4605004E8193 /* ForeCastHomeWorker.swift */,
+				E9D7840C272A4605004E8193 /* ForeCastHomeRouter.swift */,
+				E9D7840D272A4605004E8193 /* ForeCastHomeModels.swift */,
+				E9D7840E272A4605004E8193 /* ForeCastHomeViewController.swift */,
+				E9D7840F272A4605004E8193 /* ForeCastHomeInteractor.swift */,
+			);
+			path = ForeCastHome;
+			sourceTree = "<group>";
+		};
+		E9D78409272A45EF004E8193 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,11 +371,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9D78407272A4555004E8193 /* GetForeCastHomeUsecase.swift in Sources */,
 				E9D783DB27286F1F004E8193 /* NetworkConfig.swift in Sources */,
+				E9D78415272A4605004E8193 /* ForeCastHomeInteractor.swift in Sources */,
 				E9D783F727287D3C004E8193 /* WeatherHomeModels.swift in Sources */,
 				E9D783F827287D3C004E8193 /* WeatherHomeViewController.swift in Sources */,
+				E9D78414272A4605004E8193 /* ForeCastHomeViewController.swift in Sources */,
 				E9D783E42728788C004E8193 /* WeatherHomeAPI.swift in Sources */,
+				E9D783FF2729DA84004E8193 /* WeatherForeCastAPI.swift in Sources */,
 				E9D783F427287D3C004E8193 /* WeatherHomePresenter.swift in Sources */,
+				E9D78413272A4605004E8193 /* ForeCastHomeModels.swift in Sources */,
+				E9D784042729DD09004E8193 /* ForeCastHomeRepository.swift in Sources */,
 				E9D783F527287D3C004E8193 /* WeatherHomeWorker.swift in Sources */,
 				E9D783EA27287C66004E8193 /* WeatherHomeRepository.swift in Sources */,
 				E9D783CE27286E39004E8193 /* JSONMapper+Extensions.swift in Sources */,
@@ -330,10 +390,14 @@
 				E9D783E22728785F004E8193 /* GetWeatherHomeRequest.swift in Sources */,
 				E9D783B527286D07004E8193 /* ViewController.swift in Sources */,
 				E9D783F927287D3C004E8193 /* WeatherHomeInteractor.swift in Sources */,
+				E9D78410272A4605004E8193 /* ForeCastHomePresenter.swift in Sources */,
 				E9D783D827286EC1004E8193 /* Network.swift in Sources */,
+				E9D784012729DAFC004E8193 /* GetForeCastHomeResponse.swift in Sources */,
 				E9D783B127286D07004E8193 /* AppDelegate.swift in Sources */,
 				E9D783B327286D07004E8193 /* SceneDelegate.swift in Sources */,
+				E9D78411272A4605004E8193 /* ForeCastHomeWorker.swift in Sources */,
 				E9D783FD27292EA7004E8193 /* GetWeatherHomeUsecase.swift in Sources */,
+				E9D78412272A4605004E8193 /* ForeCastHomeRouter.swift in Sources */,
 				E9D783D527286E9E004E8193 /* NetworkProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,13 +14,17 @@ import UIKit
 
 protocol ForeCastHomeDisplayLogic: class
 {
-    func displaySomething(viewModel: ForeCastHome.Something.ViewModel)
-//    func displaySomethingElse(viewModel: ForeCastHome.SomethingElse.ViewModel)
+    func ForeCast(res:GetWeatherHomeElement)
+
+    func display(weather:GetWeatherHomeElement?)
 }
 
 class ForeCastHomeViewController: UIViewController, ForeCastHomeDisplayLogic {
     var interactor: ForeCastHomeBusinessLogic?
     var router: (NSObjectProtocol & ForeCastHomeRoutingLogic & ForeCastHomeDataPassing)?
+    
+    var fore: GetWeatherHomeElement?
+
 
     // MARK: Object lifecycle
 
@@ -49,56 +53,22 @@ class ForeCastHomeViewController: UIViewController, ForeCastHomeDisplayLogic {
         router.dataStore = interactor
     }
 
-    // MARK: - Routing
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-
     // MARK: - View lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
-//        doSomethingElse()
+        interactor?.getForeCastDays(city: "")
     }
     
-    //MARK: - receive events from UI
-    
-    //@IBOutlet weak var nameTextField: UITextField!
-//
-//    @IBAction func someButtonTapped(_ sender: Any) {
-//
-//    }
-//
-//    @IBAction func otherButtonTapped(_ sender: Any) {
-//
-//    }
-    
-    // MARK: - request data from ForeCastHomeInteractor
-
-    func doSomething() {
-        let request = ForeCastHome.Something.Request()
-        interactor?.doSomething(request: request)
+    func display(weather:GetWeatherHomeElement?)
+    {
+        title = weather?.name
+        print("lopdfkosdf",weather?.name ?? "")
     }
-//
-//    func doSomethingElse() {
-//        let request = ForeCastHome.SomethingElse.Request()
-//        interactor?.doSomethingElse(request: request)
-//    }
-
-    // MARK: - display view model from ForeCastHomePresenter
-
-    func displaySomething(viewModel: ForeCastHome.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+}
+ 
+extension ForeCastHomeViewController {
+    func ForeCast(res:GetWeatherHomeElement){
+        fore = res
     }
-//
-//    func displaySomethingElse(viewModel: ForeCastHome.SomethingElse.ViewModel) {
-//        // do sometingElse with viewModel
-//    }
 }

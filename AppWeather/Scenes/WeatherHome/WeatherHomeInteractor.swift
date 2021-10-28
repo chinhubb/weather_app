@@ -15,12 +15,17 @@ import UIKit
 
 protocol WeatherHomeBusinessLogic {
     func fetch(city: String)
+
+    func toForeCast()
 }
 
 protocol WeatherHomeDataStore {
+    var dataWeather: GetWeatherHomeElement? { get }
 }
 
 final class WeatherHomeInteractor: WeatherHomeBusinessLogic, WeatherHomeDataStore {
+    var dataWeather: GetWeatherHomeElement?
+    
     var presenter: WeatherHomePresentationLogic?
     lazy var worker: WeatherHomeWorkable? = {
         WeatherHomeWorker()
@@ -33,11 +38,15 @@ final class WeatherHomeInteractor: WeatherHomeBusinessLogic, WeatherHomeDataStor
         isLoading = true
         worker?.getHomeWeather(city: city).subscribe(onSuccess: { [weak self] response in
             self?.presenter?.presentWeather(res: response)
-
+            self?.dataWeather = response
             self?.isLoading = false
         }, onFailure: { [weak self] error in
             self?.isLoading = false
             print("Error: \(error)")
         }, onDisposed: nil).disposed(by: disposeBag)
+    }
+    
+    func toForeCast(){
+        presenter?.presentForeCast()
     }
 }
