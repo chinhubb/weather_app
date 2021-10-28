@@ -15,7 +15,7 @@ import UIKit
 protocol WeatherHomeDisplayLogic: class {
     func presentWeather(res: GetWeatherHomeElement)
 
-    func displayMovieDetail()
+    func displayCity(viewModel: WeatherHome.Show.ViewModel)
 }
 
 final class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic {
@@ -71,6 +71,19 @@ final class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic
         convertBtn.isHidden = true
     }
 
+    @IBAction func daysForeCast(_ sender: Any) {
+        ShareData()
+    }
+
+    func ShareData() {
+        let name = cityTextField.text!
+        let request = WeatherHome.Show.Request(name: name)
+        interactor?.ShareData(request: request)
+    }
+
+    func displayCity(viewModel: WeatherHome.Show.ViewModel) {
+        router?.routeToForeCast(segue: nil)
+    }
 
     @IBAction func onClick(_ sender: Any) {
         interactor?.fetch(city: input ?? "")
@@ -126,9 +139,5 @@ extension WeatherHomeViewController {
             humidityLabel.text = "humidity : \(humidity) %"
         }
         imageWeather.image = UIImage(named: "\(weather?.weather?[0].icon ?? "")")
-    }
-    
-    func displayMovieDetail() {
-        router?.routeToMovieDetail()
     }
 }

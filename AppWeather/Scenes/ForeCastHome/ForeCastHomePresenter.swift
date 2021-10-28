@@ -13,11 +13,15 @@
 import UIKit
 
 protocol ForeCastHomePresentationLogic {
-
+    func presentGreeting(response: ForeCastHome.Show.Response)
 }
 
 class ForeCastHomePresenter: ForeCastHomePresentationLogic {
     weak var viewController: ForeCastHomeDisplayLogic?
-    
-  
+
+    func presentGreeting(response: ForeCastHome.Show.Response) {
+        let city = response.name
+        let viewModel = ForeCastHome.Show.ViewModel(city: city)
+        viewController?.displayGreeting(viewModel: viewModel)
+    }
 }

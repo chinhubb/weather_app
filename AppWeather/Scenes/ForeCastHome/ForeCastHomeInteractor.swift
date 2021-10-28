@@ -15,18 +15,16 @@ import UIKit
 
 protocol ForeCastHomeBusinessLogic {
     func getForeCastDays(city: String)
+
+    func showGreeting(request: ForeCastHome.Show.Request)
 }
 
 protocol ForeCastHomeDataStore {
-    var movieID: Int? { get set }
-    var data: GetWeatherHomeElement? { get set }
+    var name: String { get set }
 }
 
 class ForeCastHomeInteractor: ForeCastHomeBusinessLogic, ForeCastHomeDataStore {
-  
-    var movieID: Int?
-    
-    var data: GetWeatherHomeElement?
+    var name: String = ""
 
     var presenter: ForeCastHomePresentationLogic?
     lazy var worker: ForeCastHomeWorkable? = {
@@ -35,13 +33,16 @@ class ForeCastHomeInteractor: ForeCastHomeBusinessLogic, ForeCastHomeDataStore {
 
     private var list: [GetForeCastHomeItemModel] = []
 
-
     fileprivate var disposeBag = DisposeBag()
+
+    func showGreeting(request: ForeCastHome.Show.Request) {
+        let response = ForeCastHome.Show.Response(name: name)
+        presenter?.presentGreeting(response: response)
+    }
 
     func getForeCastDays(city: String) {
         worker?.getForeCast(city: city).subscribe(onSuccess: { [weak self] response in
-//            print("res_list", response.list)
-
+            print("podfkos", response.list)
         }, onFailure: { [weak self] error in
             print("Error: \(error)")
         }, onDisposed: nil).disposed(by: disposeBag)

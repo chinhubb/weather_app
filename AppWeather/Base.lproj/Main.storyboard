@@ -11,7 +11,6 @@
         <!--Weather Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="WeatherHomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="WeatherHomeViewController" customModule="AppWeather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -85,18 +84,19 @@
                     <navigationItem key="navigationItem" id="ige-gP-su5">
                         <barButtonItem key="rightBarButtonItem" title="5 days forecasr" id="nYw-SL-ibP">
                             <connections>
-                                <segue destination="YMz-rg-YcL" kind="show" identifier="ForeCastPath" id="37l-ZL-7oZ"/>
+                                <action selector="daysForeCast:" destination="BYZ-38-t0r" id="0XP-H0-0Tw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="cityTextField" destination="hNp-LG-9Zv" id="JCO-4p-Ut1"/>
-                        <outlet property="convertBtn" destination="1fP-fS-Chl" id="S5t-de-DYe"/>
+                        <outlet property="convertBtn" destination="1fP-fS-Chl" id="s7p-Jd-YhU"/>
                         <outlet property="humidityLabel" destination="wfn-HM-rtu" id="Tmg-2G-jqg"/>
                         <outlet property="imageWeather" destination="jxd-b7-TSf" id="LNh-6s-g1u"/>
                         <outlet property="tempLabel" destination="Myb-Xl-LWs" id="EOS-RP-TdR"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1944.9275362318842" y="-188.16964285714286"/>
         </scene>
@@ -108,23 +108,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oJ2-cx-It5">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jJ3-m0-AC6">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FrE-eR-oXs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="FrE-eR-oXs" firstAttribute="bottom" secondItem="oJ2-cx-It5" secondAttribute="bottom" id="FLf-Pg-Kbu"/>
-                            <constraint firstItem="oJ2-cx-It5" firstAttribute="top" secondItem="FrE-eR-oXs" secondAttribute="top" id="bst-18-cwd"/>
-                            <constraint firstItem="oJ2-cx-It5" firstAttribute="leading" secondItem="FrE-eR-oXs" secondAttribute="leading" id="mvQ-Yv-mgi"/>
-                            <constraint firstItem="FrE-eR-oXs" firstAttribute="trailing" secondItem="oJ2-cx-It5" secondAttribute="trailing" id="xOx-qU-xuX"/>
+                            <constraint firstItem="FrE-eR-oXs" firstAttribute="trailing" secondItem="jJ3-m0-AC6" secondAttribute="trailing" id="DYR-HM-rgh"/>
+                            <constraint firstItem="FrE-eR-oXs" firstAttribute="bottom" secondItem="jJ3-m0-AC6" secondAttribute="bottom" id="GV9-WB-huY"/>
+                            <constraint firstItem="jJ3-m0-AC6" firstAttribute="top" secondItem="FrE-eR-oXs" secondAttribute="top" id="SvV-Wy-FKi"/>
+                            <constraint firstItem="jJ3-m0-AC6" firstAttribute="leading" secondItem="FrE-eR-oXs" secondAttribute="leading" id="dGJ-O8-jkA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Wld-Q6-OJJ"/>
                     <connections>
-                        <outlet property="tableview" destination="oJ2-cx-It5" id="aJ3-3g-7lk"/>
+                        <outlet property="tableview" destination="jJ3-m0-AC6" id="f2o-8d-mg5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1z3-2s-e72" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

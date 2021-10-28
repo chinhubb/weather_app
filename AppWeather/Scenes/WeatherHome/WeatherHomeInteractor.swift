@@ -15,17 +15,22 @@ import UIKit
 
 protocol WeatherHomeBusinessLogic {
     func fetch(city: String)
+
+    func ShareData(request: WeatherHome.Show.Request)
 }
 
 protocol WeatherHomeDataStore {
     var dataWeather: GetWeatherHomeElement? { get }
     var nameCity: String? { get set }
+
+    var name: String { get set }
 }
 
 final class WeatherHomeInteractor: WeatherHomeBusinessLogic, WeatherHomeDataStore {
     var dataWeather: GetWeatherHomeElement?
     var nameCity: String?
-    
+    var name: String = ""
+
     var presenter: WeatherHomePresentationLogic?
     lazy var worker: WeatherHomeWorkable? = {
         WeatherHomeWorker()
@@ -45,9 +50,10 @@ final class WeatherHomeInteractor: WeatherHomeBusinessLogic, WeatherHomeDataStor
             print("Error: \(error)")
         }, onDisposed: nil).disposed(by: disposeBag)
     }
-    
-    func openMovieDetail() {
-        nameCity = dataWeather?.name
-        presenter?.presentMovieDetail()
+
+    func ShareData(request: WeatherHome.Show.Request) {
+        name = request.name
+        let response = WeatherHome.Show.Response()
+        presenter?.presentForeCast(response: response)
     }
 }

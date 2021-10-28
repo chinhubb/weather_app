@@ -13,14 +13,15 @@
 import UIKit
 
 enum WeatherHome {
-    enum PresentWeatherDetail {
+    enum Show {
         struct Request {
+            var name: String
         }
+
         struct Response {
-            var city: String?
         }
+
         struct ViewModel {
-            var city: String?
         }
     }
 }

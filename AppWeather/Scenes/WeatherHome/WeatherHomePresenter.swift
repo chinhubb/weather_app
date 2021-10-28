@@ -14,8 +14,8 @@ import UIKit
 
 protocol WeatherHomePresentationLogic {
     func presentWeather(res: GetWeatherHomeElement)
-    
-    func presentMovieDetail()
+
+    func presentForeCast(response: WeatherHome.Show.Response)
 }
 
 final class WeatherHomePresenter: WeatherHomePresentationLogic {
@@ -23,8 +23,9 @@ final class WeatherHomePresenter: WeatherHomePresentationLogic {
     func presentWeather(res: GetWeatherHomeElement) {
         viewController?.presentWeather(res: res)
     }
-    
-    func presentMovieDetail() {
-        viewController?.displayMovieDetail()
+
+    func presentForeCast(response: WeatherHome.Show.Response) {
+        let viewModel = WeatherHome.Show.ViewModel()
+        viewController?.displayCity(viewModel: viewModel)
     }
 }

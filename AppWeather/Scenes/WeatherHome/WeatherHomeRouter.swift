@@ -12,22 +12,17 @@
 
 import UIKit
 
-//@objc protocol WeatherHomeRoutingLogic {
-//    func routeToForeCast(segue: UIStoryboardSegue?)
-//
-//}
-
 @objc protocol WeatherHomeRoutingLogic {
     func routeToMovieDetail()
+
+    func routeToForeCast(segue: UIStoryboardSegue?)
 }
 
 protocol WeatherHomeDataPassing {
-    var dataStore: WeatherHomeDataStore? {get}
+    var dataStore: WeatherHomeDataStore? { get }
 }
 
 final class WeatherHomeRouter: NSObject, WeatherHomeRoutingLogic, WeatherHomeDataPassing {
-    
-    
     weak var viewController: WeatherHomeViewController?
     var dataStore: WeatherHomeDataStore?
 
@@ -50,12 +45,31 @@ final class WeatherHomeRouter: NSObject, WeatherHomeRoutingLogic, WeatherHomeDat
 //        destination.data = source.dataWeather
 //        print("opdsfkopsd", source.dataWeather?.name)
 //    }
-    
+
     func routeToMovieDetail() {
-        
     }
-    
+
     func navigateToMovieDetail(source: WeatherHomeViewController, destination: ForeCastHomeViewController) {
         source.navigationController?.pushViewController(destination, animated: true)
+    }
+
+    func routeToForeCast(segue: UIStoryboardSegue?) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let destinationVC = storyboard.instantiateViewController(withIdentifier: "ForeCastHomeViewController") as! ForeCastHomeViewController
+        var destinationDS = destinationVC.router!.dataStore!
+        passDataToForeCast(source: dataStore!, destination: &destinationDS)
+        navigateToForeCast(source: viewController!, destination: destinationVC)
+    }
+
+    func navigateToForeCast(source: WeatherHomeViewController, destination: ForeCastHomeViewController)
+    {
+        source.show(destination, sender: nil)
+    }
+
+    // MARK: Passing data
+
+    func passDataToForeCast(source: WeatherHomeDataStore, destination: inout ForeCastHomeDataStore)
+    {
+        destination.name = source.name
     }
 }

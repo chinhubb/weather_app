@@ -13,20 +13,17 @@
 import UIKit
 
 protocol ForeCastHomeDisplayLogic: class {
-    func display(weather: GetWeatherHomeElement?)
-
-    func displayTableReloadData(res:[GetForeCastHomeItemElement])  -> [GetForeCastHomeItemElement]
+    func displayGreeting(viewModel: ForeCastHome.Show.ViewModel)
 }
 
 class ForeCastHomeViewController: UIViewController, ForeCastHomeDisplayLogic {
-    
     var interactor: ForeCastHomeBusinessLogic?
     var router: (NSObjectProtocol & ForeCastHomeRoutingLogic & ForeCastHomeDataPassing)?
 
     @IBOutlet var tableview: UITableView!
 
     var fore: GetWeatherHomeElement?
-    var list:[GetForeCastHomeItemElement]?
+    var list: [GetForeCastHomeItemElement]?
 
     // MARK: Object lifecycle
 
@@ -60,7 +57,12 @@ class ForeCastHomeViewController: UIViewController, ForeCastHomeDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerTable()
-        interactor?.getForeCastDays(city: "london")
+        showGreeting()
+    }
+
+    func showGreeting() {
+        let request = ForeCastHome.Show.Request()
+        interactor?.showGreeting(request: request)
     }
 
     private func registerTable() {
@@ -68,30 +70,24 @@ class ForeCastHomeViewController: UIViewController, ForeCastHomeDisplayLogic {
         tableview.register(UINib(nibName: ForeCastTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: ForeCastTableViewCell.identifier)
     }
 
-    func display(weather: GetWeatherHomeElement?) {
-        title = weather?.name
-    }
-}
-
-extension ForeCastHomeViewController {
-    func displayTableReloadData(res:[GetForeCastHomeItemElement]) -> [GetForeCastHomeItemElement]{
-
-        return res
+    func displayGreeting(viewModel: ForeCastHome.Show.ViewModel) {
+        title = viewModel.city
+        interactor?.getForeCastDays(city: viewModel.city)
     }
 }
 
 extension ForeCastHomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list?.count ?? 0
-        
-        print("dspofks",list?.count)
+
+        print("dspofks", list?.count)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: ForeCastTableViewCell.identifier) as? ForeCastTableViewCell {            cell.render(viewModel: (list?[indexPath.row])!)
-            
-            print("podskfopsf",list?[indexPath.row].date)
-            
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ForeCastTableViewCell.identifier) as? ForeCastTableViewCell { cell.render(viewModel: (list?[indexPath.row])!)
+
+            print("podskfopsf", list?[indexPath.row].date)
+
             return cell
         }
         return UITableViewCell()
