@@ -10,7 +10,7 @@ import UIKit
 
 class ForeCastTableViewCell: UITableViewCell {
     static let identifier = "ForeCastTableViewCell"
-    static let cellHeight: CGFloat = 150.0
+    static let cellHeight: CGFloat = 80.0
     @IBOutlet var dayLabel: UILabel!
     @IBOutlet var templabel: UILabel!
     @IBOutlet var humiditylabel: UILabel!

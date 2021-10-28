@@ -17,7 +17,7 @@ protocol ForeCastHomeBusinessLogic {
     func getForeCastDays(city: String)
 
     func showGreeting(request: ForeCastHome.Show.Request)
-    
+
     // DataSource
     func getDataSourceCount() -> Int
     func getDataSourceItem(indexPath: IndexPath) -> GetForeCastHomeItemModel
@@ -36,16 +36,16 @@ class ForeCastHomeInteractor: ForeCastHomeBusinessLogic, ForeCastHomeDataStore {
     }()
 
     private var dataSource: [GetForeCastHomeItemModel] = []
-    
+
     // DataSource
     func getDataSourceCount() -> Int {
         return dataSource.count
     }
-    
+
     func getDataSourceItem(indexPath: IndexPath) -> GetForeCastHomeItemModel {
         return dataSource[indexPath.row]
     }
-    
+
     fileprivate var disposeBag = DisposeBag()
 
     func showGreeting(request: ForeCastHome.Show.Request) {
@@ -55,9 +55,11 @@ class ForeCastHomeInteractor: ForeCastHomeBusinessLogic, ForeCastHomeDataStore {
 
     func getForeCastDays(city: String) {
         worker?.getForeCast(city: city).subscribe(onSuccess: { [weak self] response in
-            
-            self?.dataSource.append(contentsOf: response.list!)
-            self?.presenter?.presentTableReloadData()
+
+            if let items = response.list {
+                self?.dataSource.append(contentsOf: items)
+                self?.presenter?.presentTableReloadData()
+            }
 
         }, onFailure: { [weak self] error in
             self?.presenter?.presentTableReloadData()
