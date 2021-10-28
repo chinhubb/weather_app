@@ -28,13 +28,19 @@ struct GetWeatherHomeElement: Codable {
 struct GetWeatherHomeItemElement: Codable {
     var temp: Double?
     var humidity: Double?
+    var tempMax: Double?
+    var tempMin: Double?
 
     init() {
         temp = nil
         humidity = nil
+        tempMax = nil
+        tempMin = nil
     }
 
     private enum CodingKeys: String, CodingKey {
+        case tempMax = "temp_max"
+        case tempMin = "temp_min"
         case temp, humidity
     }
 }
@@ -42,7 +48,7 @@ struct GetWeatherHomeItemElement: Codable {
 struct GetStatusWeatherItemElement: Codable {
     var main: String?
     var description: String?
-    var icon : String?
+    var icon: String?
 
     init() {
         main = nil

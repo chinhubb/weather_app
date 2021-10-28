@@ -14,6 +14,8 @@ import UIKit
 
 protocol ForeCastHomePresentationLogic {
     func presentGreeting(response: ForeCastHome.Show.Response)
+    
+    func presentTableReloadData()
 }
 
 class ForeCastHomePresenter: ForeCastHomePresentationLogic {
@@ -24,4 +26,9 @@ class ForeCastHomePresenter: ForeCastHomePresentationLogic {
         let viewModel = ForeCastHome.Show.ViewModel(city: city)
         viewController?.displayGreeting(viewModel: viewModel)
     }
+    
+    func presentTableReloadData() {
+        viewController?.displayTableReloadData()
+    }
+
 }

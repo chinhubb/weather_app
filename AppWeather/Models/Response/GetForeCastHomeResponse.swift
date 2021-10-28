@@ -20,16 +20,18 @@ struct GetForeCastHomeElement: Codable {
 
 struct GetForeCastHomeItemElement: Codable {
     var main: GetWeatherHomeItemElement?
+    var weather : [GetStatusWeatherItemElement]?
     var date: String?
 
     init() {
         main = nil
+        weather = nil
         date = nil
     }
 
     private enum CodingKeys: String, CodingKey {
         case date = "dt_txt"
-        case main
+        case main, weather
     }
 }
 

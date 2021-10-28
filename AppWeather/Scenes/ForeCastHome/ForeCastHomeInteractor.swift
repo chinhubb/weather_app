@@ -17,6 +17,10 @@ protocol ForeCastHomeBusinessLogic {
     func getForeCastDays(city: String)
 
     func showGreeting(request: ForeCastHome.Show.Request)
+    
+    // DataSource
+    func getDataSourceCount() -> Int
+    func getDataSourceItem(indexPath: IndexPath) -> GetForeCastHomeItemModel
 }
 
 protocol ForeCastHomeDataStore {
@@ -31,8 +35,17 @@ class ForeCastHomeInteractor: ForeCastHomeBusinessLogic, ForeCastHomeDataStore {
         ForeCastHomeWorker()
     }()
 
-    private var list: [GetForeCastHomeItemModel] = []
-
+    private var dataSource: [GetForeCastHomeItemModel] = []
+    
+    // DataSource
+    func getDataSourceCount() -> Int {
+        return dataSource.count
+    }
+    
+    func getDataSourceItem(indexPath: IndexPath) -> GetForeCastHomeItemModel {
+        return dataSource[indexPath.row]
+    }
+    
     fileprivate var disposeBag = DisposeBag()
 
     func showGreeting(request: ForeCastHome.Show.Request) {
@@ -42,8 +55,12 @@ class ForeCastHomeInteractor: ForeCastHomeBusinessLogic, ForeCastHomeDataStore {
 
     func getForeCastDays(city: String) {
         worker?.getForeCast(city: city).subscribe(onSuccess: { [weak self] response in
-            print("podfkos", response.list)
+            
+            self?.dataSource.append(contentsOf: response.list!)
+            self?.presenter?.presentTableReloadData()
+
         }, onFailure: { [weak self] error in
+            self?.presenter?.presentTableReloadData()
             print("Error: \(error)")
         }, onDisposed: nil).disposed(by: disposeBag)
     }

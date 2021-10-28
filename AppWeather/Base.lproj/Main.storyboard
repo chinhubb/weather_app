@@ -82,7 +82,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ige-gP-su5">
-                        <barButtonItem key="rightBarButtonItem" title="5 days forecasr" id="nYw-SL-ibP">
+                        <barButtonItem key="rightBarButtonItem" title="5 days forecast" id="nYw-SL-ibP">
                             <connections>
                                 <action selector="daysForeCast:" destination="BYZ-38-t0r" id="0XP-H0-0Tw"/>
                             </connections>
@@ -111,6 +111,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jJ3-m0-AC6">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="YMz-rg-YcL" id="npF-gM-kbK"/>
+                                    <outlet property="delegate" destination="YMz-rg-YcL" id="rVr-JC-JEB"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FrE-eR-oXs"/>

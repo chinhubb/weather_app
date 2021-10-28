@@ -14,6 +14,8 @@ import UIKit
 
 protocol ForeCastHomeDisplayLogic: class {
     func displayGreeting(viewModel: ForeCastHome.Show.ViewModel)
+
+    func displayTableReloadData()
 }
 
 class ForeCastHomeViewController: UIViewController, ForeCastHomeDisplayLogic {
@@ -74,20 +76,22 @@ class ForeCastHomeViewController: UIViewController, ForeCastHomeDisplayLogic {
         title = viewModel.city
         interactor?.getForeCastDays(city: viewModel.city)
     }
+
+    func displayTableReloadData() {
+        tableview.reloadData()
+    }
 }
 
 extension ForeCastHomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list?.count ?? 0
-
-        print("dspofks", list?.count)
+        return interactor?.getDataSourceCount() ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: ForeCastTableViewCell.identifier) as? ForeCastTableViewCell { cell.render(viewModel: (list?[indexPath.row])!)
-
-            print("podskfopsf", list?[indexPath.row].date)
-
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ForeCastTableViewCell.identifier) as? ForeCastTableViewCell {
+            if let viewModel = interactor?.getDataSourceItem(indexPath: indexPath) {
+                cell.render(viewModel: viewModel)
+            }
             return cell
         }
         return UITableViewCell()

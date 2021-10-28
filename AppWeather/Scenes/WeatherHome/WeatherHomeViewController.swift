@@ -72,7 +72,11 @@ final class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic
     }
 
     @IBAction func daysForeCast(_ sender: Any) {
-        ShareData()
+        if input == "" || input == nil {
+            alert()
+        } else {
+            ShareData()
+        }
     }
 
     func ShareData() {
@@ -86,7 +90,11 @@ final class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic
     }
 
     @IBAction func onClick(_ sender: Any) {
-        interactor?.fetch(city: input ?? "")
+        if input == "" || input == nil {
+            alert()
+        } else {
+            interactor?.fetch(city: input ?? "")
+        }
     }
 
     @IBAction func CelsiusToFahren(_ sender: Any) {
@@ -117,6 +125,12 @@ final class WeatherHomeViewController: UIViewController, WeatherHomeDisplayLogic
         var celsius: Double
         celsius = kelvin - 273.15
         return celsius
+    }
+
+    func alert() {
+        let alert = UIAlertController(title: "Input TextField", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true)
     }
 }
 
