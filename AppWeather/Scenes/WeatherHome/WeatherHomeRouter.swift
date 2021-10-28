@@ -13,8 +13,6 @@
 import UIKit
 
 @objc protocol WeatherHomeRoutingLogic {
-    func routeToMovieDetail()
-
     func routeToForeCast(segue: UIStoryboardSegue?)
 }
 
@@ -25,33 +23,6 @@ protocol WeatherHomeDataPassing {
 final class WeatherHomeRouter: NSObject, WeatherHomeRoutingLogic, WeatherHomeDataPassing {
     weak var viewController: WeatherHomeViewController?
     var dataStore: WeatherHomeDataStore?
-
-//    func routeToForeCast(segue: UIStoryboardSegue?) {
-//        if let segue = segue {
-//            let destinationVC = viewController?.storyboard?.instantiateViewController(withIdentifier: "ForeCastHomeViewController") as! ForeCastHomeViewController
-//            var destinationDS = destinationVC.router!.dataStore!
-//            passDataToForeCast(source: dataStore!, destination: &destinationDS)
-//            navigateToForeCast(source: viewController!, destination: destinationVC)
-//        }
-//    }
-//
-//    func navigateToForeCast(source: WeatherHomeViewController, destination: ForeCastHomeViewController)
-//    {
-//        source.show(destination, sender: nil)
-//    }
-//
-//    func passDataToForeCast(source: WeatherHomeDataStore, destination: inout ForeCastHomeDataStore)
-//    {
-//        destination.data = source.dataWeather
-//        print("opdsfkopsd", source.dataWeather?.name)
-//    }
-
-    func routeToMovieDetail() {
-    }
-
-    func navigateToMovieDetail(source: WeatherHomeViewController, destination: ForeCastHomeViewController) {
-        source.navigationController?.pushViewController(destination, animated: true)
-    }
 
     func routeToForeCast(segue: UIStoryboardSegue?) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
